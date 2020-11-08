@@ -1,32 +1,32 @@
-import { NextApiHandler, NextApiResponse } from 'next'
+import { NextApiHandler, NextApiResponse } from "next";
 
-const MATCHER = /^([^\/]+)\/([^\/@]+)(@)?(.*)/
+const MATCHER = /^([^\/]+)\/([^\/@]+)(@)?(.*)/;
 
 const invalidURL = (res: NextApiResponse) => {
-  res.status(500)
-  res.end(`Invalid URL`)
-}
+  res.status(500);
+  res.end(`Invalid URL`);
+};
 
 const handler: NextApiHandler = async (req, res) => {
-  const slug = req.query.slug as string
+  const slug = req.query.slug as string;
 
-  const m = MATCHER.exec(slug)
+  const m = MATCHER.exec(slug);
 
   if (!m) {
-    return invalidURL(res)
+    return invalidURL(res);
   }
-  const [, owner, repo, versionSpecified, rest] = m
+  const [, owner, repo, versionSpecified, rest] = m;
   if (!owner || !repo) {
-    return invalidURL(res)
+    return invalidURL(res);
   }
-  res.status(301)
+  res.status(301);
   res.setHeader(
-    'Location',
+    "Location",
     `https://raw.githubusercontent.com/${owner}/${repo}/${
-      versionSpecified ? '' : 'master'
-    }${rest || '/mod.ts'}`
-  )
-  res.end()
-}
+      versionSpecified ? "" : "master"
+    }${rest || "/mod.ts"}`
+  );
+  res.end();
+};
 
-export default handler
+export default handler;

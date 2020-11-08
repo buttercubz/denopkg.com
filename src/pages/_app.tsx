@@ -1,5 +1,5 @@
-import '../css/tailwind.css'
+import "../css/tailwind.css";
 
-export default ({Component, pageProps}: any) => {
-  return <Component {...pageProps} />
-}
+export default ({ Component, pageProps }: any) => {
+  return <Component {...pageProps} />;
+};
