@@ -46,7 +46,7 @@ const Span: React.FC<{ bg: string; leading?: boolean }> = ({
   );
 };
 
-export default () => {
+const Home = () => {
   return (
     <div>
       <Head>
@@ -57,7 +57,9 @@ export default () => {
           To use GitHub as a package registry for Deno, you only need to replace{" "}
           <code className="text-sm bg-gray-200 rounded p-1">github.com</code>{" "}
           with{" "}
-          <code className="text-sm bg-gray-200 rounded p-1">proxy.mod.land</code>{" "}
+          <code className="text-sm bg-gray-200 rounded p-1">
+            proxy.mod.land
+          </code>{" "}
           like this:
         </div>
         <div className="my-5 text-gray-400">
@@ -87,3 +89,5 @@ export default () => {
     </div>
   );
 };
+
+export default Home;

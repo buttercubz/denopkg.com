@@ -1,0 +1,28 @@
+{
+  "list": [
+    {
+      "source": "/std/testing/([^/]+)/(.+)",
+      "destination": "/api/std/testing?slug=$1/$2"
+    },
+    {
+      "source": "/std/node/([^/]+)/(.+)",
+      "destination": "/api/std/node?slug=$1/$2"
+    },
+    {
+      "source": "/std/encoding/([^/]+)/(.+)",
+      "destination": "/api/std/encoding?slug=$1/$2"
+    },
+    {
+      "source": "/std/archive/([^/]+)/(.+)",
+      "destination": "/api/std/archive?slug=$1/$2"
+    },
+    {
+      "source": "/std/_util/([^/]+)/(.+)",
+      "destination": "/api/std/_util?slug=$1/$2"
+    },
+    {
+      "source": "/std/wasi/([^/]+)/(.+)",
+      "destination": "/api/std/wasi?slug=$1/$2"
+    }
+  ]
+}

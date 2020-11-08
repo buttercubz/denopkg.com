@@ -3,8 +3,20 @@
   "scope": "denopkg",
   "rewrites": [
     {
-      "source": "/([^/]+)/(.+)",
+      "source": "/github/([^/]+)/(.+)",
       "destination": "/api/github?slug=$1/$2"
+    },
+    {
+      "source": "/gitlab/([^/]+)/(.+)",
+      "destination": "/api/gitlab?slug=$1/$2"
+    },
+    {
+      "source": "/bitbucket/([^/]+)/(.+)",
+      "destination": "/api/bitbucket?slug=$1/$2"
+    },
+    {
+      "source": "/std/fmt/([^/]+)/(.+)",
+      "destination": "/api/std/fmt?slug=$1/$2"
     }
   ]
 }

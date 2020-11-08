@@ -1,6 +1,8 @@
 import "../css/tailwind.css";
 import "../css/gruvbox.css";
 
-export default ({ Component, pageProps }: any) => {
+const App = ({ Component, pageProps }: any) => {
   return <Component {...pageProps} />;
 };
+
+export default App;
