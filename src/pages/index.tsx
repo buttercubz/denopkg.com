@@ -2,8 +2,6 @@ import Highlight from "react-highlight";
 import * as React from "react";
 import Head from "next/head";
 
-import "../../node_modules/highlight.js/styles/gruvbox-dark.css";
-
 const codeContend = `
   import {Merlin} from "https://proxy.mod.land/crewdevio/merlin/mod.ts";
 
