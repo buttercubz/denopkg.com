@@ -15,8 +15,8 @@
       "destination": "/api/bitbucket?slug=$1/$2"
     },
     {
-      "source": "/std/fmt/([^/]+)/(.+)",
-      "destination": "/api/std/fmt?slug=$1/$2"
+      "source": "/std/([^/]+)/(.+)",
+      "destination": "/api/std?slug=$1/$2"
     }
   ]
 }

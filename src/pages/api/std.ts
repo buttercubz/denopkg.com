@@ -20,6 +20,8 @@ const handler: NextApiHandler = async (req, res) => {
     return invalidURL(res);
   }
 
+  console.log({ moduleName, specifiedVersion, filepath });
+
   const versionModule: string = specifiedVersion ? specifiedVersion : "";
 
   if (!filepath) {
