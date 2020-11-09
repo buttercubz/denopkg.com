@@ -1,10 +1,11 @@
 import { NextApiHandler, NextApiResponse } from "next";
+import { ResponseProxy, modules } from "./stdHandler";
 
 const MATCHER = /^([^\/@]+)(@[^\/]+)?(.*)/;
 
 const invalidURL = (res: NextApiResponse) => {
   res.status(500);
-  res.end(`Invalid URL`);
+  res.end(`Invalid URL, must be end with /mod.ts`);
 };
 
 const handler: NextApiHandler = async (req, res) => {
@@ -16,7 +17,9 @@ const handler: NextApiHandler = async (req, res) => {
     return invalidURL(res);
   }
   const [, moduleName, specifiedVersion, filepath] = m;
-  if (!moduleName) {
+
+  // if no pass mod.ts or module name
+  if (!moduleName || filepath !== "/mod.ts" || !moduleName) {
     return invalidURL(res);
   }
 
@@ -24,14 +27,19 @@ const handler: NextApiHandler = async (req, res) => {
 
   const versionModule: string = specifiedVersion ? specifiedVersion : "";
 
-  if (!filepath) {
+  if (!specifiedVersion) {
     res.status(301);
     res.setHeader(
       "x-deno-warning",
-      `using trex proxy to download this package fmt${versionModule}`
+      `Using implicit latest version of ${moduleName}${versionModule} module`
     );
     res.setHeader("Location", `fmt${versionModule}/mod.ts`);
     res.end();
+  }
+
+  if (!modules.includes(moduleName)) {
+    res.status(404);
+    res.end(`${moduleName}${versionModule} not exists`);
   }
 
   res.setHeader("Cache-Control", [
@@ -40,23 +48,10 @@ const handler: NextApiHandler = async (req, res) => {
     "immutable",
   ]);
 
-  const version = versionModule === "" ? "" : `@${versionModule}`;
+  const version = versionModule === "" ? "" : versionModule;
 
   res.status(200);
-  res.end(`
-/**
- * Copyright (c) Crew Dev.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-import * as colors from "https://deno.land/std${version}/fmt/colors.ts";
-import * as printf from "https://deno.land/std${version}/fmt/printf.ts";
-
-export { colors, printf };
-`);
+  res.end(ResponseProxy(moduleName, version));
 };
 
 export default handler;
