@@ -33,8 +33,6 @@ const handler: NextApiHandler = async (req, res) => {
       "x-deno-warning",
       `Using implicit latest version of ${moduleName}${versionModule} module`
     );
-    // res.setHeader("Location", `${versionModule}/mod.ts`);
-    res.end();
   }
 
   if (!modules.includes(moduleName)) {
@@ -42,16 +40,18 @@ const handler: NextApiHandler = async (req, res) => {
     res.end(`${moduleName}${versionModule} not exists`);
   }
 
-  res.setHeader("Cache-Control", [
-    "s-maxage=86400",
-    "stale-if-error=1",
-    "immutable",
-  ]);
+  else {
+    res.setHeader("Cache-Control", [
+      "s-maxage=86400",
+      "stale-if-error=1",
+      "immutable",
+    ]);
 
-  const version = versionModule === "" ? "" : versionModule;
+    const version = versionModule === "" ? "" : versionModule;
 
-  res.status(200);
-  res.end(ResponseProxy(moduleName, version));
+    res.status(200);
+    res.end(ResponseProxy(moduleName, version));
+  }
 };
 
 export default handler;
