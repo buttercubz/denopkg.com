@@ -33,7 +33,7 @@ const handler: NextApiHandler = async (req, res) => {
       "x-deno-warning",
       `Using implicit latest version of ${moduleName}${versionModule} module`
     );
-    res.setHeader("Location", `fmt${versionModule}/mod.ts`);
+    // res.setHeader("Location", `${versionModule}/mod.ts`);
     res.end();
   }
 
